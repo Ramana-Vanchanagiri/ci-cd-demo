@@ -11,4 +11,9 @@ class AppTest {
             App.greet()
         );
     }
+
+    @Test
+    void getBuildStatusReturnsReadyMessage() {
+        assertEquals("Application is ready!", App.getBuildStatus());
+    }
 }

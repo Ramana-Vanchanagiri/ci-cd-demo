@@ -8,4 +8,8 @@ public class App {
     public static void main(String[] args) {
         System.out.println(greet());
     }
+
+    public static String getBuildStatus() {
+        return "Application is ready!";
+    }
 }
