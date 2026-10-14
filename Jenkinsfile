@@ -22,9 +22,15 @@ pipeline {
             }
         }
 
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t ci-cd-demo:1.0 .'
+            }
+        }
+
         stage('Build Successful') {
             steps {
-                echo 'Build, tests, and JAR artifact archival completed!'
+                echo 'Tests passed, JAR archived, and Docker image built!'
             }
         }
     }
