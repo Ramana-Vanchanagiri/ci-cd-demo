@@ -1,10 +1,12 @@
+
 pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Checkout from GitHub') {
             steps {
-                echo 'Source code checked out from GitHub'
+                checkout scm
+                sh 'git log -1 --oneline'
             }
         }
 
@@ -13,7 +15,7 @@ pipeline {
                 sh '''
                     docker run --rm \
                       --network ci-network \
-                      -v /Users/ramanavanchanagiri/coding/ci-cd-demo:/app \
+                      -v "$WORKSPACE:/app" \
                       -w /app \
                       maven:3.9.10-eclipse-temurin-21 \
                       mvn clean verify
@@ -23,7 +25,7 @@ pipeline {
 
         stage('Build Successful') {
             steps {
-                echo 'Java build and tests passed!'
+                echo 'GitHub code built successfully and all tests passed!'
             }
         }
     }
