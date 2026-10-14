@@ -15,9 +15,16 @@ pipeline {
             }
         }
 
+        stage('Archive JAR Artifact') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar',
+                                 fingerprint: true
+            }
+        }
+
         stage('Build Successful') {
             steps {
-                echo 'GitHub code built successfully and all tests passed!'
+                echo 'Build, tests, and JAR artifact archival completed!'
             }
         }
     }
